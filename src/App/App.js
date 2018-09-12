@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import TopNav from './components/nav/TopNav'
 import Main from './components/body/Main'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const AppContainer = styled.div`
   height: 100%;

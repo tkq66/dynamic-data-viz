@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react'
+import VizDisplay from './VizDisplay'
+import Settings from './Settings'
+import styled from 'styled-components'
 
 const MainContainer = styled.div`
   height: 100%;
@@ -24,8 +26,10 @@ class Main extends Component {
     return (
       <MainContainer>
         <VizContainer>
+          <VizDisplay />
         </VizContainer>
         <SettingsContainer>
+          <VizDisplay />
         </SettingsContainer>
       </MainContainer>
     )

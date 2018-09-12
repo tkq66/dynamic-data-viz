@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const SettingsContainer = styled.div`
+const VizDisplayContainer = styled.div`
   height: 100%;
   width: 100%;
   background-color: red;
 `
 
-class Settings extends Component {
+class VizDisplay extends Component {
   render() {
     return (
-      <SettingsContainer>
-      </SettingsContainer>
+      <VizDisplayContainer>
+      </VizDisplayContainer>
     )
   }
 }
 
-export default Settings
+export default VizDisplay
