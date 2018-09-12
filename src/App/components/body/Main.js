@@ -29,7 +29,7 @@ class Main extends Component {
           <VizDisplay />
         </VizContainer>
         <SettingsContainer>
-          <VizDisplay />
+          <Settings />
         </SettingsContainer>
       </MainContainer>
     )
