@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import VizDisplay from './VizDisplay'
-import Settings from './Settings'
+import VizDisplayContainer from './VizDisplay/VizDisplayContainer'
+import SettingsContainer from './Settings/SettingsContainer'
 import styled from 'styled-components'
 
 const MainContainer = styled.div`
@@ -9,14 +9,15 @@ const MainContainer = styled.div`
   flex-direction: row;
 `
 
-const VizContainer = styled.div`
-  flex: 3 1 auto;
+const VizFrame = styled.div`
+  flex: 3 0 1px;
   background-color: #B5E2FA;
   padding: 3vh;
 `
 
-const SettingsContainer = styled.div`
-  flex: 1 1 auto;
+const SettingsFrame = styled.div`
+  flex: 1 0 auto;
+  flex-shrink: 0;
   background-color: #EFEFEF;
   padding: 3vh;
 `
@@ -25,12 +26,12 @@ class Main extends Component {
   render() {
     return (
       <MainContainer>
-        <VizContainer>
-          <VizDisplay />
-        </VizContainer>
-        <SettingsContainer>
-          <Settings />
-        </SettingsContainer>
+        <VizFrame>
+          <VizDisplayContainer />
+        </VizFrame>
+        <SettingsFrame>
+          <SettingsContainer />
+        </SettingsFrame>
       </MainContainer>
     )
   }
