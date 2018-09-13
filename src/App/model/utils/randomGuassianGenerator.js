@@ -1,4 +1,6 @@
 export default class RandomGuassianGenerator {
+
+    // This method generates a standard gaussian distribution.
     static generateStandard() {
         var z = 1;
         var x = 0;
@@ -13,6 +15,7 @@ export default class RandomGuassianGenerator {
         return [x * p, y * p];
     }
 
+    // This method generates the trimodal guassian distribution.
     static generateTrimodal(mean, sigma) {
         var result = 0.0;
         for (var i = 0; i < 3; i++) {

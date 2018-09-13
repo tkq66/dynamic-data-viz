@@ -4,11 +4,13 @@ export default class PredictionBuilder {
         this.prediction = {};
     }
 
-    add(key, value) {
-        this.prediction[key] = value;
+    // This method adds attributes for the prediction to be build.
+    add(attribute, attributeValue) {
+        this.prediction[attribute] = attributeValue;
         return this;
     }
 
+    // This method builds the prediction to be displayed.
     build() {
         var prediction = Object.assign({}, this.prediction);
         this.prediction = {};

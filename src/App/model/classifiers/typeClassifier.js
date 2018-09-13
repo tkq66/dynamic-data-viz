@@ -17,15 +17,18 @@ export default class TypeClassifier {
         this.sigmas = [1.0, 1.0, 1.0];
     }
 
+    // This method classifies type using a trimodal guassian distribution.
     classify() {
         var random = RandomGuassianGenerator.generateTrimodal(this.means, this.sigmas);
         return this.findType(random);
     }
 
+    // private method for finding the type given the prediction values.
     findType(random) {
         return this.types[this.indexToType[this.getClosest(random)]];
     }
 
+    // private method for finding the closest class given prediction values.
     getClosest(random) {
         var dists = this.means.map( function(value) { 
             return Math.abs(value - random); 

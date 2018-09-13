@@ -8,7 +8,7 @@ export default class TaskClassifier {
             "lineChart3": [0, 0, 1]
         };
 
-        this.indexToType = {
+        this.indexToTask = {
             0: "lineChart1",
             1: "lineChart2",
             2: "lineChart3"
@@ -17,15 +17,18 @@ export default class TaskClassifier {
         this.sigmas = [1.0, 1.0, 1.0];
     }
 
+    // This method classifies task using a trimodal guassian distribution.
     classify() {
         var random = RandomGuassianGenerator.generateTrimodal(this.means, this.sigmas);
-        return this.findType(random);
+        return this.findTask(random);
     }
 
-    findType(random) {
-        return this.types[this.indexToType[this.getClosest(random)]];
+    // private method for finding the task given the prediction values.
+    findTask(random) {
+        return this.task[this.indexToTask[this.getClosest(random)]];
     }
 
+    // private method for finding the closest class given prediction values.
     getClosest(random) {
         var dists = this.means.map( function(value) { 
             return Math.abs(value - random); 

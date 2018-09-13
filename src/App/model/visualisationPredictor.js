@@ -4,7 +4,7 @@ import {TypeClassifier} from './classifiers/typeClassifier';
 import {PredictionBuilder} from './utils/predictionBuilder';
 
 
-export default class modelController {
+export default class VisualisationPredictor {
     constructor() {
         this.simulation = new Simulation();
         this.taskClassifier = new TaskClassifier();
@@ -12,6 +12,7 @@ export default class modelController {
         this.predictionBuilder = new PredictionBuilder();
     }
 
+    // This method predicts the type of visualisation to be displayed.
     predict() {
         while(true) {
             if (this.simulation.isObserved()) {
