@@ -1,5 +1,5 @@
 class RandomGuassianGenerator {
-    static generate() {
+    static generateStandard() {
         var z = 1;
         var x = 0;
         var y = 0;
@@ -11,5 +11,14 @@ class RandomGuassianGenerator {
 
         var p = Math.sqrt(-2 * Math.log(z) / z);
         return [x * p, y * p];
+    }
+
+    static generateTrimodal(mean, sigma) {
+        var result = 0.0;
+        for (var i = 0; i < 3; i++) {
+            result += this.generateStandard()[0] * sigma[i] + mean[i];
+        }
+
+        return result / 3.0;
     }
 }

@@ -1,3 +1,5 @@
-function Controller() {
-    
+class modelController {
+    constructor(){
+        
+    }
 }
