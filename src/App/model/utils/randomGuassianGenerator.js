@@ -1,4 +1,4 @@
-class RandomGuassianGenerator {
+export default class RandomGuassianGenerator {
     static generateStandard() {
         var z = 1;
         var x = 0;

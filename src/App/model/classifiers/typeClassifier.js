@@ -1,4 +1,6 @@
-class TypeClassifier {
+import {RandomGuassianGenerator} from '../utils/randomGuassianGenerator';
+
+export default class TypeClassifier {
     constructor() {
         this.types = {
             "search": [1, 0, 0], 
@@ -15,7 +17,7 @@ class TypeClassifier {
         this.sigmas = [1.0, 1.0, 1.0];
     }
 
-    randomizeType() {
+    classify() {
         var random = RandomGuassianGenerator.generateTrimodal(this.means, this.sigmas);
         return this.findType(random);
     }
