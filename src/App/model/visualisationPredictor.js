@@ -1,28 +1,43 @@
-import {Simulation} from './utils/simulation';
-import {TaskClassifier} from './classifiers/taskClassifier';
-import {TypeClassifier} from './classifiers/typeClassifier';
-import {PredictionBuilder} from './utils/predictionBuilder';
+import {Component} from 'react'
+import {connect} from 'react-redux'
+import {EventEmitter} from 'fbemitter'
+import {mapStateToProps, mapDispatchToProps} from 'App/store/mappers'
+import Simulation from './utils/simulation'
+import TaskClassifier from './classifiers/taskClassifier'
+import TypeClassifier from './classifiers/typeClassifier'
+import PredictionBuilder from './utils/predictionBuilder'
+import ModelToVisAdapter from './adapter/modelToVis'
 
+class VisualisationPredictor extends Component {
+  constructor(props) {
+    super(props)
 
-export default class VisualisationPredictor {
-    constructor() {
-        this.simulation = new Simulation();
-        this.taskClassifier = new TaskClassifier();
-        this.typeClassifier = new TypeClassifier();
-        this.predictionBuilder = new PredictionBuilder();
-    }
+    this.taskClassifier = new TaskClassifier()
+    this.typeClassifier = new TypeClassifier()
+    this.predictionBuilder = new PredictionBuilder()
+    this.modelToVis = new ModelToVisAdapter()
 
-    // This method predicts the type of visualisation to be displayed.
-    predict() {
-        while(true) {
-            if (this.simulation.isObserved()) {
-                var task = this.taskClassifier.classify();
-                var type = this.typeClassifier.classify();
-                var prediction = this.predictionBuilder.add("type", type)
-                                                       .add("task", task)
-                                                       .build();
-                // TODO: add adapter communication code here.
-            }
-        }
-    }
+    this.emitter = new EventEmitter()
+    this.observationEvent = "observe"
+    this.emitter.addListener(this.observationEvent, this.predict.bind(this))
+    this.simulation = new Simulation(this.emitter, this.observationEvent)
+    this.simulation.observeEvents()
+  }
+
+  // This method predicts the type of visualisation  to be displayed.
+  predict() {
+    let task = this.taskClassifier.classify()
+    let type = this.typeClassifier.classify()
+    let prediction = this.predictionBuilder.add("type", type).add("task", task).build()
+    let visParams = this.modelToVis.visParam(prediction)
+    this.props.action.setColor(visParams.color)
+    console.log(prediction.type)
+    // TODO: add adapter communication code here.
+  }
+
+  render() {
+    return null
+  }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(VisualisationPredictor)

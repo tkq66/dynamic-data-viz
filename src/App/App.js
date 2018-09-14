@@ -4,11 +4,11 @@ import TopNav from './components/nav/TopNav'
 import Main from './components/body/Main'
 
 const AppContainer = styled.div`
-  height: 100%;
-  text-align: center;
+  height: 100%
+  text-align: center
 
-  display: flex;
-  flex-direction: column;
+  display: flex
+  flex-direction: column
 `
 
 class App extends Component {

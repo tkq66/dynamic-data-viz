@@ -11,6 +11,8 @@ export const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch => ({
   action: {
     setDefault: () => dispatch(actions.setDefault()),
+    setSize: (width, height) => dispatch(actions.setSize(width, height)),
+    setColor: color => dispatch(actions.setColor(color)),
     modifyParams: newParams => dispatch(actions.modifyParams(newParams))
   }
 })
