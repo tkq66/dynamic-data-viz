@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import WidgetContainer from 'App/components/vizWidgets/WidgetContainer'
 
 const SettingsContainer = styled.div`
   height: 100%
@@ -11,6 +12,7 @@ class Settings extends Component {
   render() {
     return (
       <SettingsContainer>
+      <WidgetContainer />
       </SettingsContainer>
     )
   }

@@ -5,7 +5,7 @@ export default class RandomGuassianGenerator {
         var z = 1
         var x = 0
         var y = 0
-        while (z >= 1 || z == 0) {
+        while (z >= 1 || z === 0) {
             x = Math.random() * 2 - 1
             y = Math.random() * 2 - 1
             z = x*x + y*y
