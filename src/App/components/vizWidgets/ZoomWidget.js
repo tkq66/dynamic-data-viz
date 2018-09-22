@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import SimpleListMenu from './SimpleMenuList'
 import { withStyles } from '@material-ui/core/styles'
+import Checkbox from '@material-ui/core/Checkbox'
 
 const menuStyle = {
     display:'flex', 
@@ -26,14 +27,10 @@ class ZoomWidget extends Component {
                  ref={ref => this.cardRef = ref}
                  id={card.id}>
                 <div className='card-inner ripple'>
-                    <div className="information">
+                    <div className="menuList" style={menuStyle}>
                         <div className="value">{card.value}</div>
                         <div className="label">{card.label}</div>
-                        <div class="menuList" style={menuStyle}>
-                            <SimpleListMenu />
-                            <SimpleListMenu />
-                            <SimpleListMenu />
-                        </div>
+                        <Checkbox />
                     </div>
                 </div>
             </div>

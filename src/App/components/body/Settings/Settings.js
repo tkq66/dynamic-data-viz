@@ -8,6 +8,7 @@ const SettingsContainer = styled.div`
   background-color: #dedede
 `
 
+
 class Settings extends Component {
   render() {
     return (

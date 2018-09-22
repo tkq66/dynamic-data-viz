@@ -10,6 +10,10 @@ const menuStyle = {
     padding: '20px'
 }
 
+const addMargin = {
+  margin: '30px 10px'
+}
+
 const styles = theme => ({
     root: {
       backgroundColor: theme.palette.background.paper,
@@ -39,14 +43,12 @@ class FilterWidget extends Component {
                  ref={ref => this.cardRef = ref}
                  id={card.id}>
                 <div className='card-inner ripple'>
-                    <div className="information">
-                        <div className="value">{card.value}</div>
-                        <div className="label">{card.label}</div>
-                        <div class="menuList" style={menuStyle}>
-                            <SimpleListMenu options={fromOptions} text="Start"/>
-                            <Button>To</Button>
-                            <SimpleListMenu options={toOptions} text="End"/>
-                        </div>
+                    <div class="menuList" style={menuStyle}>
+                        <div className="value" style={addMargin}>{card.value}</div>
+                        <div className="label" style={addMargin}>{card.label}</div>
+                        <SimpleListMenu options={fromOptions} text="Start"/>
+                        <Button>To</Button>
+                        <SimpleListMenu options={toOptions} text="End"/>
                     </div>
                 </div>
             </div>
