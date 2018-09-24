@@ -31,7 +31,6 @@ class VisualisationPredictor extends Component {
     let prediction = this.predictionBuilder.add("type", type).add("task", task).build()
     let visParams = this.modelToVis.visParam(prediction)
     this.props.action.setColor(visParams.color)
-    console.log(prediction.type)
     // TODO: add adapter communication code here.
   }
 
