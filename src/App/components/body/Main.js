@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import VizDisplayContainer from './VizDisplay/VizDisplayContainer'
 import SettingsContainer from './Settings/SettingsContainer'
 import styled from 'styled-components'
-
 import VisualisationPredictor from 'App/model/visualisationPredictor'
+
 
 const MainContainer = styled.div`
   height: 100%
@@ -26,15 +26,15 @@ const SettingsFrame = styled.div`
 class Main extends Component {
   render() {
     return (
-      <MainContainer>
-        <VisualisationPredictor />
-        <VizFrame>
-          <VizDisplayContainer />
-        </VizFrame>
-        <SettingsFrame>
-          <SettingsContainer />
-        </SettingsFrame>
-      </MainContainer>
+        <MainContainer>
+          <VisualisationPredictor />
+          <VizFrame>
+            <VizDisplayContainer />
+          </VizFrame>
+          <SettingsFrame>
+            <SettingsContainer />
+          </SettingsFrame>
+        </MainContainer>
     )
   }
 }

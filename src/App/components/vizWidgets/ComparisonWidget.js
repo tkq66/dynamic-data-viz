@@ -43,7 +43,7 @@ class ComparisonWidget extends Component {
                  ref={ref => this.cardRef = ref}
                  id={card.id}>
                 <div className='card-inner ripple'>
-                    <div class="menuList" style={menuStyle}>
+                    <div className="menuList" style={menuStyle}>
                         <div className="value" style={addMargin}>{card.value}</div>
                         <div className="label" style={addMargin}>{card.label}</div>
                         <SimpleListMenu options={fromOptions} text="Start"/>

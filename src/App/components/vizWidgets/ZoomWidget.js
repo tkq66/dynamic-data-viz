@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import SimpleListMenu from './SimpleMenuList'
 import { withStyles } from '@material-ui/core/styles'
 import Checkbox from '@material-ui/core/Checkbox'
 
