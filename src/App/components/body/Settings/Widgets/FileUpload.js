@@ -1,22 +1,57 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
 import Widget from './Prototype/Widget'
 import Papa from 'papaparse'
 
 class FileUpload extends Component {
   constructor(props) {
     super(props)
+    this.data = { values: [] }
     this.fileUpload = this.fileUpload.bind(this)
+    this.appendData = this.appendData.bind(this)
     this.handleFile = this.handleFile.bind(this)
-  }
-
-  handleFile(e) {
-    console.log(e.data)
   }
 
   fileUpload(e) {
     Papa.parse(e.target.files[0], {
-    	complete: this.handleFile
+      header: true,
+      step: this.appendData,
+      complete: this.handleFile
     })
+  }
+
+  appendData(row) {
+    let data = row.data[0]
+    for (let field in data) {
+      if (field === "date" ||
+          data[field] === "") {
+        continue
+      }
+      this.data.values.push({
+        date: data["date"],
+        price: data[field],
+        symbol: field
+      })
+    }
+  }
+
+  handleFile(e) {
+    this.props.action.setEncoding({
+      x: {
+        field: "date",
+        type: "temporal"
+      },
+      y: {
+        field: "price",
+        type: "quantitative"
+      },
+      color: {
+        field: "symbol",
+        type: "nominal"
+      }
+    })
+    this.props.action.setData(this.data)
   }
 
   render() {
@@ -28,4 +63,7 @@ class FileUpload extends Component {
   }
 }
 
-export default FileUpload
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FileUpload)

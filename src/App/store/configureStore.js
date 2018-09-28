@@ -6,7 +6,7 @@ import visSettings from '../reducers/visSettings'
 const loggerMiddleware = createLogger() // initialize logger
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,  // lets us dispatch() functions
-  loggerMiddleware
+  // loggerMiddleware
 )(createStore)
 
 const rootReducer = combineReducers({

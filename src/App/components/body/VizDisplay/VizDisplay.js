@@ -9,14 +9,6 @@ const VizDisplayContainer = styled.div`
   background-color: #ffffff
 `
 
-const barData = {
-  "values": [
-    {"a": 1091289600000,"b": 20}, {"a": 1093968000000,"b": 34}, {"a": 1096560000000,"b": 55},
-    {"a": 1099238400000, "b": 19}, {"a": 1101830400000,"b": 40}, {"a": 1104508800000,"b": 34},
-    {"a": 1107187200000,"b": 91}, {"a": 1109606400000,"b": 78}, {"a": 1112284800000,"b": 25}
-  ]
-}
-
 class VizDisplay extends Component {
   constructor(props) {
     super(props)
@@ -30,7 +22,7 @@ class VizDisplay extends Component {
   render() {
     return (
       <VizDisplayContainer innerRef={r => this.vizRef = r}>
-        <VegaLite spec={this.props.state.spec} data={barData} />
+        <VegaLite spec={this.props.state.spec} data={this.props.state.data} />
       </VizDisplayContainer>
     )
   }
