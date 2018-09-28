@@ -6,7 +6,9 @@ export default class EventParent extends Component {
 
   componentDidMount () {
     // Detects clicks everywhere on the screen
-    window.addEventListener('click', this.resetDropdown)
+    window.addEventListener('click', e => {
+      console.log("hey")
+    })
   }
 
   componentWillUnmount () {
