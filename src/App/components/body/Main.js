@@ -18,7 +18,7 @@ const VizFrame = styled.div`
 `
 
 const SettingsFrame = styled.div`
-  flex: 1 0 auto
+  flex: 1 0 1px
   background-color: #EFEFEF
   padding: 3vh
 `
