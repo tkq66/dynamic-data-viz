@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
 import styled from 'styled-components'
 import VegaLite from 'react-vega-lite'
 
@@ -34,4 +36,7 @@ class VizDisplay extends Component {
   }
 }
 
-export default VizDisplay
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VizDisplay)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import VizDisplayContainer from './VizDisplay/VizDisplayContainer'
-import SettingsContainer from './Settings/SettingsContainer'
 import styled from 'styled-components'
+import VizDisplay from './VizDisplay/VizDisplay'
+import Settings from './Settings/Settings'
 import VisualisationPredictor from 'App/model/visualisationPredictor'
 
 
@@ -29,10 +29,10 @@ class Main extends Component {
         <MainContainer>
           <VisualisationPredictor />
           <VizFrame>
-            <VizDisplayContainer />
+            <VizDisplay />
           </VizFrame>
           <SettingsFrame>
-            <SettingsContainer />
+            <Settings />
           </SettingsFrame>
         </MainContainer>
     )

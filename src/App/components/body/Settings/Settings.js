@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
 import styled from 'styled-components'
-import WidgetContainer from './Widgets/Container/Container'
+import WidgetParent from './Widgets/Parent/WidgetParent'
 import FileUpload from './Widgets/FileUpload'
 import Zoom from './Widgets/Zoom'
 import Filter from './Widgets/Filter'
@@ -17,15 +19,18 @@ class Settings extends Component {
   render() {
     return (
       <SettingsContainer>
-        <WidgetContainer>
+        <WidgetParent>
           <FileUpload />
           <Zoom />
           <Filter />
           <Compare />
-        </WidgetContainer>
+        </WidgetParent>
       </SettingsContainer>
     )
   }
 }
 
-export default Settings
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Settings)
