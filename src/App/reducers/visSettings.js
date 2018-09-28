@@ -4,6 +4,8 @@ export const types = {
   SET_DEFAULT: "SET_DEFAULT",
   SET_SIZE: "SET_SIZE",
   SET_COLOR: "SET_COLOR",
+  ENABLE_ZOOM: "ENABLE_ZOOM",
+  DISABLE_ZOOM: "DISABLE_ZOOM",
   SET_ENCODING: "SET_ENCODING",
   MODIFY_PARAMS: "MODIFY_PARAMS",
 }
@@ -25,6 +27,12 @@ export const actions = {
   setColor: color => ({
     type: types.SET_COLOR,
     color
+  }),
+  enableZoom: () => ({
+    type: types.ENABLE_ZOOM
+  }),
+  disableZoom: () => ({
+    type: types.DISABLE_ZOOM
   }),
   setEncoding: encoding => ({
     type: types.SET_ENCODING,
@@ -58,6 +66,18 @@ const initialState = {
    spec: {
        "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
        "description": "A simple bar chart with embedded data.",
+       "selection": {
+         "grid": {
+           "type": "interval",
+           "bind": "scales",
+           "on": "[mousedown, window:mouseup] > window:mousemove!",
+           "encodings": ["x", "y"],
+           "translate": "[mousedown, window:mouseup] > window:mousemove!",
+           "zoom": "wheel!",
+           "mark": {"fill": "#333", "fillOpacity": 0.125, "stroke": "white"},
+           "resolve": "global"
+         }
+       },
        "mark": {
          "type": "line",
          "color": "green"
