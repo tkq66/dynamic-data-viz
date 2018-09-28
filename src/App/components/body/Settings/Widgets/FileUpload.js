@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Widget from './Prototype/Widget'
 import Papa from 'papaparse'
 
 class FileUpload extends Component {
@@ -20,7 +21,9 @@ class FileUpload extends Component {
 
   render() {
     return (
-      <input type="file" id="file-upload-input" onChange={this.fileUpload} />
+      <Widget title="File Upload" body={
+        <input type="file" id="file-upload-input" onChange={this.fileUpload} />
+      } />
     )
   }
 }

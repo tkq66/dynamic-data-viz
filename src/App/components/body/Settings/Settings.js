@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import {EventEmitter} from 'fbemitter'
 import styled from 'styled-components'
+import WidgetContainer from './Widgets/Container/Container'
 import FileUpload from './Widgets/FileUpload'
-import WidgetContainer from 'App/components/vizWidgets/WidgetContainer'
+import Zoom from './Widgets/Zoom'
+import Filter from './Widgets/Filter'
+import Compare from './Widgets/Compare'
 
 const SettingsContainer = styled.div`
   height: 100%
@@ -15,8 +17,12 @@ class Settings extends Component {
   render() {
     return (
       <SettingsContainer>
-        <FileUpload />
-        <WidgetContainer />
+        <WidgetContainer>
+          <FileUpload />
+          <Zoom />
+          <Filter />
+          <Compare />
+        </WidgetContainer>
       </SettingsContainer>
     )
   }

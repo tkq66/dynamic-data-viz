@@ -15,20 +15,13 @@ export default class RandomGuassianGenerator {
         return [x * p, y * p]
     }
 
-    var p = Math.sqrt(-2 * Math.log(z) / z)
-    return [
-      x * p,
-      y * p
-    ]
-  }
+    // This method generates the trimodal guassian distribution.
+    static generateTrimodal(mean, sigma) {
+        var result = 0.0
+        for (var i = 0; i < 3; i++) {
+            result += this.generateStandard()[0] * sigma[i] + mean[i]
+        }
 
-  // This method generates the trimodal guassian distribution.
-  static generateTrimodal(mean, sigma) {
-    var result = 0.0
-    for (var i = 0; i < 3; i++) {
-      result += this.generateStandard()[0] * sigma[i] + mean[i]
+        return result / 3.0
     }
-
-    return result / 3.0
-  }
 }
