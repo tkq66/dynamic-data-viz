@@ -40,7 +40,8 @@ class FileUpload extends Component {
     this.props.action.setEncoding({
       x: {
         field: "date",
-        type: "temporal"
+        type: "temporal",
+        "timeUnit": "utcyearmonthdate"
       },
       y: {
         field: "price",
