@@ -7,6 +7,7 @@ import FileUpload from './Widgets/FileUpload'
 import Zoom from './Widgets/Zoom'
 import Filter from './Widgets/Filter'
 import Compare from './Widgets/Compare'
+import EmotionDetector from '../../facial_features/emotionsDetector'
 
 const SettingsContainer = styled.div`
   height: 100%
@@ -16,6 +17,11 @@ const SettingsContainer = styled.div`
 
 
 class Settings extends Component {
+
+  handleClick = () => {
+    this.props.onClickFunction(this.props.incrementValue);
+  };
+
   render() {
     return (
       <SettingsContainer>
@@ -24,6 +30,7 @@ class Settings extends Component {
           <Zoom />
           <Filter />
           <Compare />
+          <EmotionDetector />
         </WidgetParent>
       </SettingsContainer>
     )
