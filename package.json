@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.0.2",
     "fbemitter": "^2.1.1",
+    "lodash": "^4.17.11",
     "papaparse": "^4.6.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
