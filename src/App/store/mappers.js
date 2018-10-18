@@ -14,8 +14,6 @@ export const mapDispatchToProps = dispatch => ({
     setData: data => dispatch(actions.setData(data)),
     setDefault: () => dispatch(actions.setDefault()),
     setSize: (width, height) => dispatch(actions.setSize(width, height)),
-    setColor: color => dispatch(actions.setColor(color)),
-    setEncoding: encoding => dispatch(actions.setEncoding(encoding)),
     modifyParams: newParams => dispatch(actions.modifyParams(newParams))
   }
 })
