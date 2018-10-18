@@ -30,7 +30,7 @@ class Settings extends Component {
           <Zoom />
           <Filter />
           <Compare />
-          <EmotionDetector />
+          {/* <EmotionDetector /> */}
         </WidgetParent>
       </SettingsContainer>
     )

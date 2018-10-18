@@ -27,7 +27,6 @@ class Main extends Component {
   render() {
     return (
         <MainContainer>
-          <VisualisationPredictor />
           <VizFrame>
             <VizDisplay />
           </VizFrame>
