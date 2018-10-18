@@ -30,7 +30,7 @@ class VizDisplay extends Component {
   render() {
     return (
       <VizDisplayContainer innerRef={r => this.vizRef = r}>
-        <VegaLite spec={this.props.state.spec} data={this.props.state.data} onNewView={this.attachEventListeners} />
+        <VegaLite spec={this.props.state.spec} onNewView={this.attachEventListeners} />
       </VizDisplayContainer>
     )
   }

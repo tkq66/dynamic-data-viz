@@ -56,26 +56,27 @@ export const actions = {
   }
 */
 const initialState = {
-  data: {
-   "values": [
-     {"a": 1091289600000,"b": 20}, {"a": 1093968000000,"b": 34}, {"a": 1096560000000,"b": 55},
-     {"a": 1099238400000, "b": 19}, {"a": 1101830400000,"b": 40}, {"a": 1104508800000,"b": 34},
-     {"a": 1107187200000,"b": 91}, {"a": 1109606400000,"b": 78}, {"a": 1112284800000,"b": 25}
-   ]
-  },
+  data: {},
   spec: {
      "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
      "description": "A simple bar chart with embedded data.",
+     "data": {
+       "url": "http://localhost:3000/data/turkey_stock_data.csv"
+     },
      "selection": {
-       "grid": {
+       // "grid": {
+       //   "type": "interval",
+       //   "bind": "scales",
+       //   "on": "[mousedown, window:mouseup] > window:mousemove!",
+       //   "encodings": ["x", "y"],
+       //   "translate": "[mousedown, window:mouseup] > window:mousemove!",
+       //   "zoom": "wheel!",
+       //   "mark": {"fill": "#333", "fillOpacity": 0.125, "stroke": "white"},
+       //   "resolve": "global"
+       // },
+       "brush": {
          "type": "interval",
-         "bind": "scales",
-         "on": "[mousedown, window:mouseup] > window:mousemove!",
-         "encodings": ["x", "y"],
-         "translate": "[mousedown, window:mouseup] > window:mousemove!",
-         "zoom": "wheel!",
-         "mark": {"fill": "#333", "fillOpacity": 0.125, "stroke": "white"},
-         "resolve": "global"
+         "encodings": ["x"]
        }
      },
      "mark": {
@@ -88,9 +89,19 @@ const initialState = {
        "contains": "padding"
      },
      "encoding": {
-       "x": {"field": "a", "type": "temporal"},
-       "y": {"field": "b", "type": "quantitative"},
-       "color": {"field": "symbol", "type": "nominal"}
+       x: {
+         field: "date",
+         type: "temporal",
+         "timeUnit": "utcyearmonthdate"
+       },
+       y: {
+         field: "price",
+         type: "quantitative"
+       },
+       color: {
+         field: "symbol",
+         type: "nominal"
+       }
      }
    }
  }
