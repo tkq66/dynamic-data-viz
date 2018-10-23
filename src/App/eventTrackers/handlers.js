@@ -37,18 +37,24 @@ export default {
 
   mousemove: e => {
     console.log("mousemove")
+    console.log(e)
+    console.log(document.elementFromPoint(e.clientX,e.clientY))
+    // console.log(e.clientX, e.clientY, e.movementX, e.movementY)
   },
 
   mouseout: e => {
     console.log("mouseout")
+    console.log(e.clientX, e.clientY, e.movementX, e.movementY)
   },
 
   mouseover: e => {
     console.log("mouseover")
+    console.log(e.clientX, e.clientY, e.movementX, e.movementY)
   },
 
   mouseup: e => {
     console.log("mouseup")
+    console.log(e.clientX, e.clientY, e.movementX, e.movementY)
   },
 
   mousewheel: e => {

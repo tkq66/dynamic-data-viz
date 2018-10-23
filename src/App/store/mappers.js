@@ -4,16 +4,15 @@ import { actions } from 'App/reducers/visSettings.js'
 export const mapStateToProps = state => ({
   state: {
     data: state.visSettings.data,
-    spec: state.visSettings.spec
+    fields: state.visSettings.fields,
+    referenceField: state.visSettings.referenceField
   }
 })
 
 // here we're mapping actions to props
 export const mapDispatchToProps = dispatch => ({
   action: {
-    setData: data => dispatch(actions.setData(data)),
-    setDefault: () => dispatch(actions.setDefault()),
-    setSize: (width, height) => dispatch(actions.setSize(width, height)),
-    modifyParams: newParams => dispatch(actions.modifyParams(newParams))
+    setData: (data, fields) => dispatch(actions.setData(data, fields)),
+    setRefField: field => dispatch(actions.setRefField(field))
   }
 })
