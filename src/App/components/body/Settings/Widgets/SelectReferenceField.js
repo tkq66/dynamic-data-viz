@@ -27,7 +27,7 @@ class ReferenceFieldSelection extends Component {
             <em>{this.props.state.fields.length === 0 ? "None" : "Choose"}</em>
           </MenuItem>
           {this.props.state.fields.map(field =>
-            <MenuItem key={field} value={field}>{field}</MenuItem>
+            <MenuItem key={field.name} value={field.name}>{field.name}</MenuItem>
           )}
         </Select>
       </FormControl>}/>

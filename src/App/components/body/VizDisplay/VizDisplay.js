@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
 import styled from 'styled-components'
-import randomColor from 'randomcolor'
-import { VictoryLine, VictoryChart, VictoryAxis, VictoryTheme, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
+import { VictoryLine, VictoryChart, VictoryTheme, VictoryVoronoiContainer, VictoryTooltip, VictoryLegend } from 'victory'
 
 const VizDisplayContainer = styled.div`
   height: 100%
@@ -48,30 +47,42 @@ class VizDisplay extends Component {
                 />}
             />}
           >
+            <VictoryLegend x={this.state.width * 0.8} y={50} width={80}
+            	title="Legend"
+              centerTitle
+              orientation="vertical"
+              gutter={20}
+              style={{ border: { stroke: "black" }, title: {fontSize: 20 } }}
+              data={this.props.state.activeFields.map(f => ({
+                name: f.name,
+                symbol: {
+                  fill: f.color
+                },
+                labels: {
+                  fill: f.color
+                }
+              }))}
+            />
           {this.props.state.referenceField !== "" &&
-            this.props.state.fields
-              .filter(f => f !== this.props.state.referenceField)
-              .map(f => {
-                let fieldColor = randomColor()
-                return <VictoryLine
-                    key={f}
-                    data={this.props.state.data}
-                    x={d => new Date(d[this.props.state.referenceField])}
-                    y={d => {
-                      d[fieldNameKey] = f
-                      return d[f]
-                    }}
-                    style={{
-                      data: {
-                        stroke:fieldColor,
-                        strokeWidth: (d, active) => {return active ? 4 : 2;}
-                      },
-                      labels: {
-                        fill: fieldColor
-                      }
-                    }}
-                  />
-              })
+            this.props.state.activeFields.map(f =>
+                <VictoryLine
+                  key={f.name}
+                  data={this.props.state.data}
+                  x={d => new Date(d[this.props.state.referenceField])}
+                  y={d => {
+                    d[fieldNameKey] = f.name
+                    return d[f.name]
+                  }}
+                  style={{
+                    data: {
+                      stroke:f.color,
+                      strokeWidth: (d, active) => {return active ? 4 : 2;}
+                    },
+                    labels: {
+                      fill: f.color
+                    }
+                  }}
+                />)
           }
         </VictoryChart>
       </VizDisplayContainer>

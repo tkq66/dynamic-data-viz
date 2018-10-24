@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import VizDisplay from './VizDisplay/VizDisplay'
 import Settings from './Settings/Settings'
-import VisualisationPredictor from 'App/model/visualisationPredictor'
-
 
 const MainContainer = styled.div`
   height: 100%

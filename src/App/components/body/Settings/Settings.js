@@ -4,8 +4,9 @@ import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
 import styled from 'styled-components'
 import WidgetParent from './Widgets/Parent/WidgetParent'
 import FileUpload from './Widgets/FileUpload'
-import ReferenceFieldSelection from './Widgets/ReferenceFieldSelection'
-import EmotionDetector from '../../facial_features/emotionsDetector'
+import SelectReferenceField from './Widgets/SelectReferenceField'
+import SelectActiveField from './Widgets/SelectActiveField'
+// import EmotionDetector from '../../facial_features/emotionsDetector'
 
 const SettingsContainer = styled.div`
   height: 100%
@@ -25,7 +26,8 @@ class Settings extends Component {
       <SettingsContainer>
         <WidgetParent>
           <FileUpload />
-          <ReferenceFieldSelection />
+          <SelectReferenceField />
+          <SelectActiveField />
           {/* <EmotionDetector /> */}
         </WidgetParent>
       </SettingsContainer>
