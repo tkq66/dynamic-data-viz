@@ -10,9 +10,9 @@ import Radio from '@material-ui/core/Radio'
 import Widget from './Prototype/Widget'
 
 const RadioGroupSpan = styled(RadioGroup) `
-  display: flex;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
+  display: flex
+  flex-direction: row !important
+  flex-wrap: wrap !important
 `
 
 class SelectMode extends Component {

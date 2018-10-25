@@ -10,8 +10,8 @@ import Input from '@material-ui/core/Input'
 import Widget from './Prototype/Widget'
 
 const Chips = styled.div `
-  display: flex;
-  flex-wrap: wrap;
+  display: flex
+  flex-wrap: wrap
 `
 
 class SelectActiveFields extends Component {

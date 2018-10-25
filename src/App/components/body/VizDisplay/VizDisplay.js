@@ -7,6 +7,9 @@ import MainMLTS from './MainChart/MainMLTS'
 const VizDisplayContainer = styled.div`
   height: 100%
   background-color: #ffffff
+
+  display: flex
+  flex-direction: column
 `
 
 class VizDisplay extends Component {
