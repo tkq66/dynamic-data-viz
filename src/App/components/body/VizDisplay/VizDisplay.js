@@ -47,7 +47,7 @@ class VizDisplay extends Component {
                   flyoutStyle={{ fill: "white" }}
                 />}
               cursorDimension="x"
-              cursorLabel={(d) => `${d.x}`}
+              cursorLabel={(d) => `${d.x.toLocaleDateString("en-GB")}`}
             />}
         >
             <VictoryLegend x={this.state.width * 0.8} y={50} width={80}
