@@ -15,7 +15,6 @@ class VizDisplay extends Component {
   constructor(props) {
     super(props)
     this.vizRef = null
-    this.tracker = null
     this.state = {
       width: 0,
       height: 0
