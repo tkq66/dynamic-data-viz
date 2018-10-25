@@ -5,7 +5,8 @@ import styled from 'styled-components'
 import WidgetParent from './Widgets/Parent/WidgetParent'
 import FileUpload from './Widgets/FileUpload'
 import SelectReferenceField from './Widgets/SelectReferenceField'
-import SelectActiveField from './Widgets/SelectActiveField'
+import SelectActiveFields from './Widgets/SelectActiveFields'
+import SelectMode from './Widgets/SelectMode'
 // import EmotionDetector from '../../facial_features/emotionsDetector'
 
 const SettingsContainer = styled.div`
@@ -13,7 +14,6 @@ const SettingsContainer = styled.div`
   width: 100%
   background-color: #dedede
 `
-
 
 class Settings extends Component {
 
@@ -27,7 +27,8 @@ class Settings extends Component {
         <WidgetParent>
           <FileUpload />
           <SelectReferenceField />
-          <SelectActiveField />
+          <SelectActiveFields />
+          <SelectMode />
           {/* <EmotionDetector /> */}
         </WidgetParent>
       </SettingsContainer>

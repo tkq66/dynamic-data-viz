@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
 import styled from 'styled-components'
-import { createContainer, VictoryLine, VictoryChart, VictoryTheme, VictoryVoronoiContainer, VictoryTooltip, VictoryLegend } from 'victory'
+import { createContainer,
+         VictoryLine,
+         VictoryChart,
+         VictoryTheme,
+         VictoryTooltip,
+         VictoryLegend } from 'victory'
 
 const VoronoiCursorContainer = createContainer("voronoi", "cursor")
 
@@ -38,17 +43,20 @@ class VizDisplay extends Component {
           height={this.state.height}
           scale={{ x: "time", y: "linear" }}
           containerComponent={
-            <VoronoiCursorContainer
-              voronoiDimension="x"
-              labels={(d) => `${d[fieldNameKey]}: ${d[d[fieldNameKey]]}`}
-              labelComponent={
-                <VictoryTooltip
-                  cornerRadius={0}
-                  flyoutStyle={{ fill: "white" }}
-                />}
-              cursorDimension="x"
-              cursorLabel={(d) => `${d.x.toLocaleDateString("en-GB")}`}
-            />}
+            this.props.state.isLocateMode  && (
+              <VoronoiCursorContainer
+                voronoiDimension="x"
+                labels={(d) => `${d[fieldNameKey]}: ${d[d[fieldNameKey]]}`}
+                labelComponent={
+                  <VictoryTooltip
+                    cornerRadius={0}
+                    flyoutStyle={{ fill: "white" }}
+                  />}
+                cursorDimension="x"
+                cursorLabel={(d) => `${d.x.toLocaleDateString("en-GB")}`}
+              />
+            )
+          }
         >
             <VictoryLegend x={this.state.width * 0.8} y={50} width={80}
             	title="Legend"

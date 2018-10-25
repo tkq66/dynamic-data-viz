@@ -6,7 +6,7 @@ import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
 import Widget from './Prototype/Widget'
 
-class ReferenceFieldSelection extends Component {
+class SelectReferenceField extends Component {
   constructor(props) {
     super(props)
     this.selectRefField = this.selectRefField.bind(this)
@@ -38,4 +38,4 @@ class ReferenceFieldSelection extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ReferenceFieldSelection)
+)(SelectReferenceField)

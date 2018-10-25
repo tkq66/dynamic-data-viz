@@ -14,13 +14,13 @@ const Chips = styled.div `
   flex-wrap: wrap;
 `
 
-class SelectActiveField extends Component {
+class SelectActiveFields extends Component {
   constructor(props) {
     super(props)
-    this.selectActiveField = this.selectActiveField.bind(this)
+    this.selectActiveFields = this.selectActiveFields.bind(this)
   }
 
-  selectActiveField(e) {
+  selectActiveFields(e) {
     this.props.action.setActiveFields(e.target.value)
   }
 
@@ -29,7 +29,7 @@ class SelectActiveField extends Component {
       <FormControl>
         <Select multiple
                 value={this.props.state.activeFields.map(f => f.name)}
-                onChange={this.selectActiveField}
+                onChange={this.selectActiveFields}
                 input={<Input id="select-multiple-chip" />}
                 displayEmpty
                 name="field"
@@ -52,4 +52,4 @@ class SelectActiveField extends Component {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectActiveField)
+)(SelectActiveFields)
