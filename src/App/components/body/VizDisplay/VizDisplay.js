@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
+import {interactionModeNames} from 'App/reducers/visSettings'
 import styled from 'styled-components'
 import { createContainer,
          VictoryLine,
          VictoryChart,
          VictoryTheme,
          VictoryTooltip,
-         VictoryLegend } from 'victory'
+         VictoryLegend,
+         VictoryVoronoiContainer } from 'victory'
 
 const VoronoiCursorContainer = createContainer("voronoi", "cursor")
 
@@ -33,6 +35,37 @@ class VizDisplay extends Component {
     })
   }
 
+  containerFactory(fieldNameKey) {
+    switch(this.props.state.interactionMode.value) {
+      case interactionModeNames.LOCATE:
+        return (
+          <VoronoiCursorContainer
+            voronoiDimension="x"
+            labels={(d) => `${d[fieldNameKey]}: ${d[d[fieldNameKey]]}`}
+            labelComponent={
+              <VictoryTooltip
+                cornerRadius={0}
+                flyoutStyle={{ fill: "white" }}
+              />}
+            cursorDimension="x"
+            cursorLabel={(d) => `${d.x.toLocaleDateString("en-GB")}`}
+          />
+        )
+      default:
+        return (
+          <VictoryVoronoiContainer
+            voronoiDimension="x"
+            labels={(d) => `${d[fieldNameKey]}: ${d[d[fieldNameKey]]}`}
+            labelComponent={
+              <VictoryTooltip
+                cornerRadius={0}
+                flyoutStyle={{ fill: "white" }}
+              />}
+          />
+        )
+    }
+  }
+
   render() {
     let fieldNameKey = "fieldName"
     return (
@@ -42,21 +75,7 @@ class VizDisplay extends Component {
           width={this.state.width}
           height={this.state.height}
           scale={{ x: "time", y: "linear" }}
-          containerComponent={
-            this.props.state.isLocateMode  && (
-              <VoronoiCursorContainer
-                voronoiDimension="x"
-                labels={(d) => `${d[fieldNameKey]}: ${d[d[fieldNameKey]]}`}
-                labelComponent={
-                  <VictoryTooltip
-                    cornerRadius={0}
-                    flyoutStyle={{ fill: "white" }}
-                  />}
-                cursorDimension="x"
-                cursorLabel={(d) => `${d.x.toLocaleDateString("en-GB")}`}
-              />
-            )
-          }
+          containerComponent={this.containerFactory(fieldNameKey)}
         >
             <VictoryLegend x={this.state.width * 0.8} y={50} width={80}
             	title="Legend"

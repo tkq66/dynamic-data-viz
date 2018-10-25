@@ -1,4 +1,4 @@
-import { actions, isLocateMode, modeName } from 'App/reducers/visSettings.js'
+import { actions, isLocateMode, isZoomMode } from 'App/reducers/visSettings.js'
 
 // gives our component access to state through props.<prop name>
 export const mapStateToProps = state => ({
@@ -8,8 +8,9 @@ export const mapStateToProps = state => ({
     fields: state.visSettings.fields,
     trueFields: state.visSettings.trueFields,
     activeFields: state.visSettings.activeFields,
-    modeName: modeName(state.visSettings),
+    interactionMode: state.visSettings.interactionMode,
     isLocateMode: isLocateMode(state.visSettings),
+    isZoomMode: isZoomMode(state.visSettings),
   }
 })
 
@@ -19,6 +20,6 @@ export const mapDispatchToProps = dispatch => ({
     setData: (data, fields) => dispatch(actions.setData(data, fields)),
     setRefField: field => dispatch(actions.setRefField(field)),
     setActiveFields: fields => dispatch(actions.setActiveFields(fields)),
-    setLocateMode: () => dispatch(actions.setLocateMode()),
+    setMode: modeName => dispatch(actions.setMode(modeName)),
   }
 })
