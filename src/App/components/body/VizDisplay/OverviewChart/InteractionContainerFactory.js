@@ -4,7 +4,7 @@ import { createContainer,
          VictoryTooltip,
          VictoryVoronoiContainer } from 'victory'
 
-const VoronoiCursorContainer = createContainer("voronoi", "cursor")
+const BrushCursorContainer = createContainer("brush", "cursor")
 
 const InteractionContainerFactory = (modeName,
                                      internalFieldNameKey,
@@ -12,14 +12,8 @@ const InteractionContainerFactory = (modeName,
   switch(modeName) {
     case interactionModeNames.LOCATE:
       return (
-        <VoronoiCursorContainer
-          voronoiDimension="x"
-          labels={(d) => `${d[internalFieldNameKey]}: ${d[d[internalFieldNameKey]]}`}
-          labelComponent={
-            <VictoryTooltip
-              cornerRadius={0}
-              flyoutStyle={{ fill: "white" }}
-            />}
+        <BrushCursorContainer
+          brushDimension="x"
           cursorDimension="x"
           cursorLabel={(d) => `${(!d.x ? new Date() : d.x instanceof Date ? d.x : new Date(d.x)).toLocaleDateString("en-GB")}`}
           {...cursorContext}

@@ -6,6 +6,7 @@ export const types = {
   SET_REF_FIELD: "SET_REF_FIELD",
   SET_ACTIVE_FIELDS: "SET_ACTIVE_FIELDS",
   SET_MODE: "SET_MODE",
+  SET_CURSOR: "SET_CURSOR"
 }
 
 // Action creators
@@ -13,7 +14,8 @@ export const actions = {
   setData: (data, fields) => ({type: types.SET_DATA, data, fields}),
   setRefField: field => ({type: types.SET_REF_FIELD, field}),
   setActiveFields: fields => ({type: types.SET_ACTIVE_FIELDS, fields}),
-  setMode: (modeName) => ({type: types.SET_MODE, modeName}),
+  setMode: modeName => ({type: types.SET_MODE, modeName}),
+  setCursor: cursorValue => ({type: types.SET_CURSOR, cursorValue}),
 }
 
 /**
@@ -55,7 +57,11 @@ const initialState = {
   fields: [],
   trueFields: [],
   activeFields: [],
-  interactionMode: interactionModeRef.locate
+  interactionMode: interactionModeRef.locate,
+  cursorContext: {
+    x: Date.now(),
+    y: 0
+  }
 }
 
 // Reducers
@@ -105,11 +111,22 @@ export default function reducer(state = initialState, action) {
           interactionMode: interactionModeRef[action.modeName]
         }
       )
+    case types.SET_CURSOR:
+      return Object.assign(
+        {},
+        state,
+        {
+          cursorContext: {
+            x: !action.cursorValue.x ? Date.now() : action.cursorValue.x instanceof Date ? action.cursorValue.x.valueOf() : action.cursorValue.x,
+            y: action.cursorValue.y || 0
+          }
+        }
+      )
     default:
       return state
   }
 }
 
 // Selectors
-export const isLocateMode = state => state.interactionMode.value === "locate"
-export const isZoomMode = state => state.interactionMode.value === "zoom"
+export const isLocateMode = state => state.interactionMode.value === interactionModeNames.LOCATE
+export const isZoomMode = state => state.interactionMode.value === interactionModeNames.ZOOM

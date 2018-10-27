@@ -12,7 +12,10 @@ const MainMLTS = props => (
     xFieldName={props.xFieldName}
     dataFieldNames={props.dataFieldNames}
     data={props.data}
-    interactionContainer={InteractionContainerFactory(props.currentMode, internalFieldNameKey)}
+    interactionContainer={InteractionContainerFactory(
+                            props.currentMode,
+                            internalFieldNameKey,
+                            props.cursorContext)}
     legend={
       <VictoryLegend x={props.width * 0.8} y={50} width={80}
         title="Legend"
@@ -34,7 +37,6 @@ const MainMLTS = props => (
     lineChartStyle={f => ({
       data: {
         stroke:f.color,
-        strokeWidth: (d, active) => {return active ? 4 : 2;}
       },
       labels: {
         fill: f.color

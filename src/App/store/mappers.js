@@ -9,6 +9,7 @@ export const mapStateToProps = state => ({
     trueFields: state.visSettings.trueFields,
     activeFields: state.visSettings.activeFields,
     interactionMode: state.visSettings.interactionMode,
+    cursorContext: state.visSettings.cursorContext,
     isLocateMode: isLocateMode(state.visSettings),
     isZoomMode: isZoomMode(state.visSettings),
   }
@@ -21,5 +22,6 @@ export const mapDispatchToProps = dispatch => ({
     setRefField: field => dispatch(actions.setRefField(field)),
     setActiveFields: fields => dispatch(actions.setActiveFields(fields)),
     setMode: modeName => dispatch(actions.setMode(modeName)),
+    setCursor: cursorValue => dispatch(actions.setCursor(cursorValue)),
   }
 })
