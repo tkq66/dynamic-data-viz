@@ -1,5 +1,6 @@
 import React from 'react'
 import { VictoryChart,
+         VictoryAxis,
          VictoryTheme,
          VictoryLine } from 'victory'
 
@@ -12,6 +13,8 @@ const MultiLineTimeSeries = (props) => (
     containerComponent={props.interactionContainer}
   >
     {props.legend}
+    <VictoryAxis offsetY={50}/>
+    <VictoryAxis dependentAxis offsetX={50} crossAxis={false}/>
     {props.xFieldName !== "" &&
       props.dataFieldNames.map(f =>
           <VictoryLine
