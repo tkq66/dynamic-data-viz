@@ -21,14 +21,19 @@ const InteractionContainerFactory = (xFieldName,
       voronoiDimension: "x",
       labels: (d) => `${d[internalFieldNameKey]}: ${d[d[internalFieldNameKey]]}`,
       labelComponent: (
-        <VictoryTooltip
-          cornerRadius={0}
-          flyoutStyle={{ fill: "white" }}
-        />),
+        <VictoryTooltip cornerRadius={0} flyoutStyle={{
+          fill: "white"
+        }}/>
+      )
     },
     cursor: {
       cursorDimension: "x",
-      cursorLabel: (d) => `${(!d.x ? new Date() : d.x instanceof Date ? d.x : new Date(d.x)).toLocaleDateString("en-GB")}`,
+      cursorLabel: (d) => `${ (
+        !d.x
+        ? new Date()
+        : d.x instanceof Date
+          ? d.x
+          : new Date(d.x)).toLocaleDateString("en-GB")}`,
       ...cursorContext
     },
     zoom: {
