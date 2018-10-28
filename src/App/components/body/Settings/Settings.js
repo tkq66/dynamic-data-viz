@@ -30,7 +30,7 @@ class Settings extends Component {
           <SelectReferenceField />
           <SelectActiveFields />
           <SelectModeMain />
-          <SelectModeOverview />
+          <SelectModeOverview last />
           {/* <EmotionDetector /> */}
         </WidgetParent>
       </SettingsContainer>

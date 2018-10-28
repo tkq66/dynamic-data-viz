@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Widget from './Widget'
 
 const SelectMode = props => (
-  <Widget title={props.title} body={
+  <Widget last={props.last} title={props.title} body={
     <FormControl>
       <Select value={props.currentMode}
               onChange={props.onModeChange}>

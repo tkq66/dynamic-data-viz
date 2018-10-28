@@ -17,7 +17,7 @@ class SelectReferenceField extends Component {
   }
 
   render() {
-    return (<Widget title="Select Reference Field" body={
+    return (<Widget last={this.props.last} title="Select Reference Field" body={
       <FormControl>
         <Select value={this.props.state.referenceField}
                 onChange={this.selectRefField}

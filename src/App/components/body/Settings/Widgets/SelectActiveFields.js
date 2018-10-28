@@ -25,7 +25,7 @@ class SelectActiveFields extends Component {
   }
 
   render() {
-    return (<Widget title="Select Active Field" body={
+    return (<Widget last={this.props.last} title="Select Active Field" body={
       <FormControl>
         <Select multiple
                 value={this.props.state.activeFields.map(f => f.name)}

@@ -32,7 +32,7 @@ class FileUpload extends Component {
 
   render() {
     return (
-      <Widget title="File Upload" body={
+      <Widget last={this.props.last} title="File Upload" body={
         <Input type="file" id="file-upload-input" onChange={this.fileUpload} />
       } />
     )
