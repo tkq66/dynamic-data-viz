@@ -43,7 +43,11 @@ export const actions = {
 // Reference values for each interaction mode
 export const mainIXModeNames = {
   A: "a",
-  B: "b"
+  B: "b",
+  C: "c",
+  D: "d",
+  E: "e",
+  F: "f",
 }
 export const mainIXModeRef = {
   [mainIXModeNames.A]: {
@@ -55,11 +59,31 @@ export const mainIXModeRef = {
     value: mainIXModeNames.B,
     label: "B",
     detail: "Zoom + Selection"
-  }
+  },
+  [mainIXModeNames.C]:  {
+    value: mainIXModeNames.C,
+    label: "C",
+    detail: "Zoom + Voronoi (y-axis)"
+  },
+  [mainIXModeNames.D]:  {
+    value: mainIXModeNames.D,
+    label: "D",
+    detail: "Zoom + Cursor (x-axis)"
+  },
+  [mainIXModeNames.E]:  {
+    value: mainIXModeNames.E,
+    label: "E",
+    detail: "Selection + Voronoi (y-axis)"
+  },
+  [mainIXModeNames.F]:  {
+    value: mainIXModeNames.F,
+    label: "F",
+    detail: "Selection + Cursor (x-axis)"
+  },
 }
 export const overviewIXModeNames = {
   X: "x",
-  Y: "y"
+  Y: "y",
 }
 export const overviewIXModeRef = {
   [overviewIXModeNames.X]: {
@@ -71,7 +95,7 @@ export const overviewIXModeRef = {
     value: overviewIXModeNames.Y,
     label: "Y",
     detail: "Brush over y-axis"
-  }
+  },
 }
 
 const initialState = {
