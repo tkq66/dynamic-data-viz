@@ -6,7 +6,8 @@ import WidgetParent from './Widgets/Parent/WidgetParent'
 import FileUpload from './Widgets/FileUpload'
 import SelectReferenceField from './Widgets/SelectReferenceField'
 import SelectActiveFields from './Widgets/SelectActiveFields'
-import SelectMainMode from './Widgets/SelectMainMode'
+import SelectModeMain from './Widgets/SelectModeMain'
+import SelectModeOverview from './Widgets/SelectModeOverview'
 // import EmotionDetector from '../../facial_features/emotionsDetector'
 
 const SettingsContainer = styled.div`
@@ -17,9 +18,9 @@ const SettingsContainer = styled.div`
 
 class Settings extends Component {
 
-  handleClick = () => {
-    this.props.onClickFunction(this.props.incrementValue);
-  };
+  selectMode(e) {
+    this.props.action.setMode(e.target.value)
+  }
 
   render() {
     return (
@@ -28,7 +29,8 @@ class Settings extends Component {
           <FileUpload />
           <SelectReferenceField />
           <SelectActiveFields />
-          <SelectMainMode />
+          <SelectModeMain />
+          <SelectModeOverview />
           {/* <EmotionDetector /> */}
         </WidgetParent>
       </SettingsContainer>

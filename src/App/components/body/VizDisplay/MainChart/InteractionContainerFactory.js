@@ -1,5 +1,5 @@
 import React from 'react'
-import {interactionModeNames} from 'App/reducers/visSettings'
+import {mainIXModeNames} from 'App/reducers/visSettings'
 import { createContainer,
          VictoryTooltip } from 'victory'
 
@@ -13,7 +13,7 @@ const InteractionContainerFactory = (xFieldName,
                                      zoomContext,
                                      selectionContext) => {
   switch(modeName) {
-    case interactionModeNames.A:
+    case mainIXModeNames.A:
       return (
         <VoronoiCursorContainer
           voronoiDimension="x"
@@ -28,7 +28,7 @@ const InteractionContainerFactory = (xFieldName,
           {...cursorContext}
         />
       )
-    default:
+    case mainIXModeNames.B:
       return (
         <ZoomSelectContainer
           zoomDimension="x"
@@ -36,6 +36,8 @@ const InteractionContainerFactory = (xFieldName,
           {...selectionContext}
         />
       )
+    default:
+      return undefined
   }
 }
 

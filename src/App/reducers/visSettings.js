@@ -5,7 +5,8 @@ export const types = {
   SET_DATA: "SET_DATA",
   SET_REF_FIELD: "SET_REF_FIELD",
   SET_ACTIVE_FIELDS: "SET_ACTIVE_FIELDS",
-  SET_MODE: "SET_MODE",
+  SET_MODE_MAIN: "SET_MODE_MAIN",
+  SET_MODE_OVERVIEW: "SET_MODE_OVERVIEW",
   SET_CURSOR: "SET_CURSOR",
   SET_DOMAIN: "SET_DOMAIN"
 }
@@ -15,7 +16,8 @@ export const actions = {
   setData: (data, fields) => ({type: types.SET_DATA, data, fields}),
   setRefField: field => ({type: types.SET_REF_FIELD, field}),
   setActiveFields: fields => ({type: types.SET_ACTIVE_FIELDS, fields}),
-  setMode: modeName => ({type: types.SET_MODE, modeName}),
+  setModeMain: modeName => ({type: types.SET_MODE_MAIN, modeName}),
+  setModeOverview: modeName => ({type: types.SET_MODE_OVERVIEW, modeName}),
   setCursor: cursorValue => ({type: types.SET_CURSOR, cursorValue}),
   setDomain: (x, y) => ({type: types.SET_DOMAIN, x, y}),
 }
@@ -39,29 +41,49 @@ export const actions = {
   }
 */
 // Reference values for each interaction mode
-export const interactionModeNames = {
+export const mainIXModeNames = {
   A: "a",
   B: "b"
 }
-export const interactionModeRef = {
-  [interactionModeNames.A]: {
-    value: interactionModeNames.A,
+export const mainIXModeRef = {
+  [mainIXModeNames.A]: {
+    value: mainIXModeNames.A,
     label: "A",
     detail: "Voronoi (y-axis) + Cursor (x-axis)"
   },
-  [interactionModeNames.B]:  {
-    value: interactionModeNames.B,
+  [mainIXModeNames.B]:  {
+    value: mainIXModeNames.B,
     label: "B",
     detail: "Zoom + Selection"
   }
 }
+export const overviewIXModeNames = {
+  X: "x",
+  Y: "y"
+}
+export const overviewIXModeRef = {
+  [overviewIXModeNames.X]: {
+    value: overviewIXModeNames.X,
+    label: "X",
+    detail: "Brush over x-axis"
+  },
+  [overviewIXModeNames.Y]:  {
+    value: overviewIXModeNames.Y,
+    label: "Y",
+    detail: "Brush over y-axis"
+  }
+}
+
 const initialState = {
   data: {},
   referenceField: "",
   fields: [],
   trueFields: [],
   activeFields: [],
-  interactionMode: interactionModeRef[interactionModeNames.A],
+  interactionMode: {
+    main: mainIXModeRef[mainIXModeNames.A],
+    overview: overviewIXModeRef[overviewIXModeNames.X]
+  },
   cursorContext: {
     x: Date.now(),
     y: 0
@@ -108,12 +130,26 @@ export default function reducer(state = initialState, action) {
           activeFields: filteredActiveFields
         }
       )
-    case types.SET_MODE:
+    case types.SET_MODE_MAIN:
       return Object.assign(
         {},
         state,
         {
-          interactionMode: interactionModeRef[action.modeName]
+          interactionMode: {
+            ...state.interactionMode,
+            main: mainIXModeRef[action.modeName]
+          }
+        }
+      )
+    case types.SET_MODE_OVERVIEW:
+      return Object.assign(
+        {},
+        state,
+        {
+          interactionMode: {
+            ...state.interactionMode,
+            overview: overviewIXModeRef[action.modeName]
+          }
         }
       )
     case types.SET_CURSOR:

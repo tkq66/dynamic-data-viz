@@ -65,7 +65,7 @@ class VizDisplay extends Component {
                   xFieldName={this.props.state.referenceField}
                   dataFieldNames={this.props.state.activeFields}
                   data={this.props.state.data}
-                  currentMode={this.props.state.interactionMode.value}
+                  currentMode={this.props.state.mainIXMode.value}
                   cursorContext={{
                     onCursorChange: this.onMainCursorChange.bind(this),
                   }}
@@ -81,7 +81,7 @@ class VizDisplay extends Component {
                       xFieldName={this.props.state.referenceField}
                       dataFieldNames={this.props.state.activeFields}
                       data={this.props.state.data}
-                      currentMode={this.props.state.interactionMode.value}
+                      currentMode={this.props.state.overviewIXMode.value}
                       cursorContext={{
                         onCursorChange: this.onOverviewCursorChange.bind(this),
                       }}
