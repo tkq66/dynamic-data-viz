@@ -12,7 +12,8 @@ const OverviewMLTS = props => (
     dataFieldNames={props.dataFieldNames}
     data={props.data}
     interactionContainer={InteractionContainerFactory(internalFieldNameKey,
-                                                      props.cursorContext)}
+                                                      props.cursorContext,
+                                                      props.brushContext)}
     lineChartStyle={f => ({
       data: {
         stroke:f.color,

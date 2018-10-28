@@ -9,7 +9,9 @@ const ZoomSelectContainer = createContainer("zoom", "selection")
 const InteractionContainerFactory = (xFieldName,
                                      modeName,
                                      internalFieldNameKey,
-                                     cursorContext) => {
+                                     cursorContext,
+                                     zoomContext,
+                                     selectionContext) => {
   switch(modeName) {
     case interactionModeNames.A:
       return (
@@ -30,6 +32,8 @@ const InteractionContainerFactory = (xFieldName,
       return (
         <ZoomSelectContainer
           zoomDimension="x"
+          {...zoomContext}
+          {...selectionContext}
         />
       )
   }

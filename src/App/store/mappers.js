@@ -10,6 +10,7 @@ export const mapStateToProps = state => ({
     activeFields: state.visSettings.activeFields,
     interactionMode: state.visSettings.interactionMode,
     cursorContext: state.visSettings.cursorContext,
+    domain: state.visSettings.domain,
   }
 })
 
@@ -21,5 +22,6 @@ export const mapDispatchToProps = dispatch => ({
     setActiveFields: fields => dispatch(actions.setActiveFields(fields)),
     setMode: modeName => dispatch(actions.setMode(modeName)),
     setCursor: cursorValue => dispatch(actions.setCursor(cursorValue)),
+    setDomain: (x, y) => dispatch(actions.setDomain(x, y)),
   }
 })

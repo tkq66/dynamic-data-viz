@@ -21,8 +21,6 @@ class VizDisplay extends Component {
       width: 0,
       height: 0
     }
-    this.onMainCursorChange = this.onMainCursorChange.bind(this)
-    this.onOverviewCursorChange = this.onOverviewCursorChange.bind(this)
   }
 
   componentDidMount () {
@@ -40,6 +38,25 @@ class VizDisplay extends Component {
     // TODO: Log activity on view
   }
 
+  onMainZoomChange(domain) {
+    this.props.action.setDomain(domain.x, domain.y)
+    // TODO: Log activity on view
+  }
+
+  onMainSelectionChange(points, bounds, props) {
+    let domain = {
+      x: bounds.x.map(b => b.valueOf()),
+      y: bounds.y
+    }
+    this.props.action.setDomain(domain.x, domain.y)
+    // TODO: Log activity on view
+  }
+
+  onOverviewBrushChange(domain) {
+    this.props.action.setDomain(domain.x, domain.y)
+    // TODO: Log activity on view
+  }
+
   render() {
     return (
       <VizDisplayContainer innerRef={r => this.vizRef = r}>
@@ -50,8 +67,15 @@ class VizDisplay extends Component {
                   data={this.props.state.data}
                   currentMode={this.props.state.interactionMode.value}
                   cursorContext={{
-                    onCursorChange: this.onMainCursorChange,
-                  }} />
+                    onCursorChange: this.onMainCursorChange.bind(this),
+                  }}
+                  zoomContext={{
+                    zoomDomain: this.props.state.domain,
+                    onZoomDomainChange: this.onMainZoomChange.bind(this)
+                  }}
+                  selectionContext={{
+                    onSelection: this.onMainSelectionChange.bind(this)
+                  }}/>
         <OverviewMLTS width={this.state.width}
                       height={this.state.height * 0.2}
                       xFieldName={this.props.state.referenceField}
@@ -59,8 +83,12 @@ class VizDisplay extends Component {
                       data={this.props.state.data}
                       currentMode={this.props.state.interactionMode.value}
                       cursorContext={{
-                        onCursorChange: this.onOverviewCursorChange,
-                      }} />
+                        onCursorChange: this.onOverviewCursorChange.bind(this),
+                      }}
+                      brushContext={{
+                        brushDomain: this.props.state.domain,
+                        onBrushDomainChange: this.onOverviewBrushChange.bind(this)
+                      }}/>
       </VizDisplayContainer>
     )
   }

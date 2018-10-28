@@ -6,7 +6,8 @@ export const types = {
   SET_REF_FIELD: "SET_REF_FIELD",
   SET_ACTIVE_FIELDS: "SET_ACTIVE_FIELDS",
   SET_MODE: "SET_MODE",
-  SET_CURSOR: "SET_CURSOR"
+  SET_CURSOR: "SET_CURSOR",
+  SET_DOMAIN: "SET_DOMAIN"
 }
 
 // Action creators
@@ -16,6 +17,7 @@ export const actions = {
   setActiveFields: fields => ({type: types.SET_ACTIVE_FIELDS, fields}),
   setMode: modeName => ({type: types.SET_MODE, modeName}),
   setCursor: cursorValue => ({type: types.SET_CURSOR, cursorValue}),
+  setDomain: (x, y) => ({type: types.SET_DOMAIN, x, y}),
 }
 
 /**
@@ -50,7 +52,7 @@ export const interactionModeRef = {
   [interactionModeNames.B]:  {
     value: interactionModeNames.B,
     label: "B",
-    detail: "Zoom + Voronoi (y-axis)"
+    detail: "Zoom + Selection"
   }
 }
 const initialState = {
@@ -63,7 +65,8 @@ const initialState = {
   cursorContext: {
     x: Date.now(),
     y: 0
-  }
+  },
+  domain: undefined
 }
 
 // Reducers
@@ -82,7 +85,7 @@ export default function reducer(state = initialState, action) {
           data: action.data,
           fields: fieldObjectList,
           trueFields: fieldObjectList,
-          activeFields: fieldObjectList
+          activeFields: fieldObjectList,
         }
       )
     case types.SET_REF_FIELD:
@@ -93,7 +96,7 @@ export default function reducer(state = initialState, action) {
         {
           referenceField: action.field,
           trueFields: filteredFieldObjectList,
-          activeFields: filteredFieldObjectList
+          activeFields: filteredFieldObjectList,
         }
       )
     case types.SET_ACTIVE_FIELDS:
@@ -121,6 +124,17 @@ export default function reducer(state = initialState, action) {
           cursorContext: {
             x: !action.cursorValue.x ? Date.now() : action.cursorValue.x instanceof Date ? action.cursorValue.x.valueOf() : action.cursorValue.x,
             y: action.cursorValue.y || 0
+          }
+        }
+      )
+    case types.SET_DOMAIN:
+      return Object.assign(
+        {},
+        state,
+        {
+          domain: {
+            x: action.x,
+            y: action.y
           }
         }
       )
