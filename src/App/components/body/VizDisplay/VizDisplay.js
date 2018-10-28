@@ -34,10 +34,6 @@ class VizDisplay extends Component {
     // TODO: Log activity on view
   }
 
-  onOverviewCursorChange(value, props) {
-    // TODO: Log activity on view
-  }
-
   onMainZoomChange(domain) {
     this.props.action.setDomain(domain.x, domain.y)
     // TODO: Log activity on view
@@ -49,6 +45,10 @@ class VizDisplay extends Component {
       y: bounds.y
     }
     this.props.action.setDomain(domain.x, domain.y)
+    // TODO: Log activity on view
+  }
+
+  onOverviewCursorChange(value, props) {
     // TODO: Log activity on view
   }
 
