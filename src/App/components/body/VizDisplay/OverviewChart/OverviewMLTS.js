@@ -11,8 +11,7 @@ const OverviewMLTS = props => (
     xFieldName={props.xFieldName}
     dataFieldNames={props.dataFieldNames}
     data={props.data}
-    interactionContainer={InteractionContainerFactory(props.currentMode,
-                                                      internalFieldNameKey,
+    interactionContainer={InteractionContainerFactory(internalFieldNameKey,
                                                       props.cursorContext)}
     lineChartStyle={f => ({
       data: {

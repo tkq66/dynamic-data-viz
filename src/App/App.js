@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import TopNav from './components/nav/TopNav'
 import Main from './components/body/Main'
+
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  }
+})
 
 const AppContainer = styled.div`
   height: 100%
@@ -14,11 +21,13 @@ const AppContainer = styled.div`
 class App extends Component {
   render() {
     return (
-      <AppContainer className="App" >
-        <TopNav />
-        <Main />
-        {/* </EventsParent> */}
-      </AppContainer>
+      <MuiThemeProvider theme={theme}>
+        <AppContainer className="App" >
+          <TopNav />
+          <Main />
+          {/* </EventsParent> */}
+        </AppContainer>
+      </MuiThemeProvider>
     )
   }
 }

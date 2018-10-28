@@ -38,17 +38,19 @@ export const actions = {
 */
 // Reference values for each interaction mode
 export const interactionModeNames = {
-  LOCATE: "locate",
-  ZOOM: "zoom"
+  A: "a",
+  B: "b"
 }
 export const interactionModeRef = {
-  [interactionModeNames.LOCATE]: {
-    value: interactionModeNames.LOCATE,
-    label: "Locate"
+  [interactionModeNames.A]: {
+    value: interactionModeNames.A,
+    label: "A",
+    detail: "Voronoi (y-axis) + Cursor (x-axis)"
   },
-  [interactionModeNames.ZOOM]:  {
-    value: interactionModeNames.ZOOM,
-    label: "Zoom"
+  [interactionModeNames.B]:  {
+    value: interactionModeNames.B,
+    label: "B",
+    detail: "Zoom + Voronoi (y-axis)"
   }
 }
 const initialState = {
@@ -57,7 +59,7 @@ const initialState = {
   fields: [],
   trueFields: [],
   activeFields: [],
-  interactionMode: interactionModeRef.locate,
+  interactionMode: interactionModeRef[interactionModeNames.A],
   cursorContext: {
     x: Date.now(),
     y: 0
@@ -126,7 +128,3 @@ export default function reducer(state = initialState, action) {
       return state
   }
 }
-
-// Selectors
-export const isLocateMode = state => state.interactionMode.value === interactionModeNames.LOCATE
-export const isZoomMode = state => state.interactionMode.value === interactionModeNames.ZOOM

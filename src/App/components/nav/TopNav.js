@@ -20,7 +20,7 @@ const TopNav = props => {
     <div>
       <AppBar>
         <ToolbarContainer>
-          <TypograhpyItem variant="title" color="inherit">
+          <TypograhpyItem variant="h6" color="inherit">
             {title}
           </TypograhpyItem>
         </ToolbarContainer>

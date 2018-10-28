@@ -13,6 +13,7 @@ const MainMLTS = props => (
     dataFieldNames={props.dataFieldNames}
     data={props.data}
     interactionContainer={InteractionContainerFactory(
+                            props.xFieldName,
                             props.currentMode,
                             internalFieldNameKey,
                             props.cursorContext)}

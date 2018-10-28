@@ -21,7 +21,8 @@ class VizDisplay extends Component {
       width: 0,
       height: 0
     }
-    this.onCursorChange = this.onCursorChange.bind(this)
+    this.onMainCursorChange = this.onMainCursorChange.bind(this)
+    this.onOverviewCursorChange = this.onOverviewCursorChange.bind(this)
   }
 
   componentDidMount () {
@@ -31,8 +32,12 @@ class VizDisplay extends Component {
     })
   }
 
-  onCursorChange(value, props) {
-    this.props.action.setCursor({x: value.x || value, y: 0})
+  onMainCursorChange(value, props) {
+    // TODO: Log activity on view
+  }
+
+  onOverviewCursorChange(value, props) {
+    // TODO: Log activity on view
   }
 
   render() {
@@ -45,8 +50,7 @@ class VizDisplay extends Component {
                   data={this.props.state.data}
                   currentMode={this.props.state.interactionMode.value}
                   cursorContext={{
-                    onCursorChange: this.onCursorChange,
-                    defaultCursorValue: this.props.state.cursorContext
+                    onCursorChange: this.onMainCursorChange,
                   }} />
         <OverviewMLTS width={this.state.width}
                       height={this.state.height * 0.2}
@@ -55,8 +59,7 @@ class VizDisplay extends Component {
                       data={this.props.state.data}
                       currentMode={this.props.state.interactionMode.value}
                       cursorContext={{
-                        onCursorChange: this.onCursorChange,
-                        defaultCursorValue: this.props.state.cursorContext
+                        onCursorChange: this.onOverviewCursorChange,
                       }} />
       </VizDisplayContainer>
     )

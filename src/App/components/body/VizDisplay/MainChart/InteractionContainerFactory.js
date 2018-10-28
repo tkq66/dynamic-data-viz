@@ -1,16 +1,17 @@
 import React from 'react'
 import {interactionModeNames} from 'App/reducers/visSettings'
 import { createContainer,
-         VictoryTooltip,
-         VictoryVoronoiContainer } from 'victory'
+         VictoryTooltip } from 'victory'
 
 const VoronoiCursorContainer = createContainer("voronoi", "cursor")
+const ZoomSelectContainer = createContainer("zoom", "selection")
 
-const InteractionContainerFactory = (modeName,
+const InteractionContainerFactory = (xFieldName,
+                                     modeName,
                                      internalFieldNameKey,
                                      cursorContext) => {
   switch(modeName) {
-    case interactionModeNames.LOCATE:
+    case interactionModeNames.A:
       return (
         <VoronoiCursorContainer
           voronoiDimension="x"
@@ -27,14 +28,8 @@ const InteractionContainerFactory = (modeName,
       )
     default:
       return (
-        <VictoryVoronoiContainer
-          voronoiDimension="x"
-          labels={(d) => `${d[internalFieldNameKey]}: ${d[d[internalFieldNameKey]]}`}
-          labelComponent={
-            <VictoryTooltip
-              cornerRadius={0}
-              flyoutStyle={{ fill: "white" }}
-            />}
+        <ZoomSelectContainer
+          zoomDimension="x"
         />
       )
   }
