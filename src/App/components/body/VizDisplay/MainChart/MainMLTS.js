@@ -17,8 +17,10 @@ const MainMLTS = props => (
                             props.currentMode,
                             internalFieldNameKey,
                             props.cursorContext,
+                            props.voronoiContext,
                             props.zoomContext,
-                            props.selectionContext)}
+                            props.selectionContext,
+                            props.brushContext)}
     legend={
       <VictoryLegend x={props.width * 0.8} y={50} width={80}
         title="Legend"

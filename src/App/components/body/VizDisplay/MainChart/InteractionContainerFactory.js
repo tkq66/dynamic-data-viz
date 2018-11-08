@@ -1,6 +1,11 @@
 import React from 'react'
 import {mainIXModeNames} from 'App/reducers/visSettings'
 import { createContainer,
+         VictoryCursorContainer,
+         VictoryVoronoiContainer,
+         VictoryZoomContainer,
+         VictorySelectionContainer,
+         VictoryBrushContainer,
          VictoryTooltip } from 'victory'
 
 const VoronoiCursorContainer = createContainer("voronoi", "cursor")
@@ -14,8 +19,10 @@ const InteractionContainerFactory = (xFieldName,
                                      modeName,
                                      internalFieldNameKey,
                                      cursorContext,
+                                     voronoiContext,
                                      zoomContext,
-                                     selectionContext) => {
+                                     selectionContext,
+                                     brushContext) => {
   let containerProps = {
     voronoi: {
       voronoiDimension: "x",
@@ -24,7 +31,8 @@ const InteractionContainerFactory = (xFieldName,
         <VictoryTooltip cornerRadius={0} flyoutStyle={{
           fill: "white"
         }}/>
-      )
+      ),
+      ...voronoiContext
     },
     cursor: {
       cursorDimension: "x",
@@ -42,6 +50,10 @@ const InteractionContainerFactory = (xFieldName,
     },
     selection: {
       ...selectionContext
+    },
+    brush: {
+      brushDimension: "x",
+      ...brushContext
     }
   }
 
@@ -86,6 +98,36 @@ const InteractionContainerFactory = (xFieldName,
         <SelectCursorContainer
           {...containerProps.selection}
           {...containerProps.cursor}
+        />
+      )
+    case mainIXModeNames.G:
+      return (
+        <VictoryCursorContainer
+          {...containerProps.cursor}
+        />
+      )
+    case mainIXModeNames.H:
+      return (
+        <VictoryVoronoiContainer
+          {...containerProps.voronoi}
+        />
+      )
+    case mainIXModeNames.I:
+      return (
+        <VictoryZoomContainer
+          {...containerProps.zoom}
+        />
+      )
+    case mainIXModeNames.J:
+      return (
+        <VictorySelectionContainer
+          {...containerProps.selection}
+        />
+      )
+    case mainIXModeNames.K:
+      return (
+        <VictoryBrushContainer
+          {...containerProps.brush}
         />
       )
     default:

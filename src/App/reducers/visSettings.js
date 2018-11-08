@@ -48,6 +48,11 @@ export const mainIXModeNames = {
   D: "d",
   E: "e",
   F: "f",
+  G: "g",
+  H: "h",
+  I: "i",
+  J: "j",
+  K: "k"
 }
 export const mainIXModeRef = {
   [mainIXModeNames.A]: {
@@ -79,6 +84,31 @@ export const mainIXModeRef = {
     value: mainIXModeNames.F,
     label: "F",
     detail: "Selection + Cursor (x-axis)"
+  },
+  [mainIXModeNames.G]:  {
+    value: mainIXModeNames.G,
+    label: "G",
+    detail: "Cursor (x-axis)"
+  },
+  [mainIXModeNames.H]:  {
+    value: mainIXModeNames.H,
+    label: "H",
+    detail: "Voronoi (y-axis)"
+  },
+  [mainIXModeNames.I]:  {
+    value: mainIXModeNames.I,
+    label: "I",
+    detail: "Zoom"
+  },
+  [mainIXModeNames.J]:  {
+    value: mainIXModeNames.J,
+    label: "J",
+    detail: "Selection"
+  },
+  [mainIXModeNames.K]:  {
+    value: mainIXModeNames.K,
+    label: "K",
+    detail: "Brush"
   },
 }
 export const overviewIXModeNames = {

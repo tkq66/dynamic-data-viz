@@ -75,6 +75,10 @@ class VizDisplay extends Component {
                   }}
                   selectionContext={{
                     onSelection: this.onMainSelectionChange.bind(this)
+                  }}
+                  brushContext={{
+                    brushDomain: this.props.state.domain,
+                    onBrushDomainChange: this.onOverviewBrushChange.bind(this)
                   }}/>
         <OverviewMLTS width={this.state.width}
                       height={this.state.height * 0.2}
