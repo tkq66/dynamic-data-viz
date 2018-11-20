@@ -41,11 +41,7 @@ class VizDisplay extends Component {
   }
 
   onMainSelectionChange(points, bounds, props) {
-    let domain = {
-      x: bounds.x.map(b => b.valueOf()),
-      y: bounds.y
-    }
-    this.props.action.setDomain(bounds.x, domain.y, domainChangeMode.SELECTION)
+    this.props.action.setDomain(bounds.x, bounds.y, domainChangeMode.SELECTION)
     // TODO: Log activity on view
   }
 
