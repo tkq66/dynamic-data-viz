@@ -1,4 +1,7 @@
 import randomColor from 'randomcolor'
+import _ from 'lodash'
+
+const SAMPLING_MAX_POINTS = 150
 
 // Action types
 export const types = {
@@ -19,7 +22,7 @@ export const actions = {
   setModeMain: modeName => ({type: types.SET_MODE_MAIN, modeName}),
   setModeOverview: modeName => ({type: types.SET_MODE_OVERVIEW, modeName}),
   setCursor: cursorValue => ({type: types.SET_CURSOR, cursorValue}),
-  setDomain: (x, y) => ({type: types.SET_DOMAIN, x, y}),
+  setDomain: (x, y, domainChangeMode) => ({type: types.SET_DOMAIN, x, y, domainChangeMode}),
 }
 
 /**
@@ -127,9 +130,15 @@ export const overviewIXModeRef = {
     detail: "Brush over y-axis"
   },
 }
+export const domainChangeMode = {
+  ZOOM: "zoom",
+  SELECTION: "selection",
+  BRUSH: "brush"
+}
 
 const initialState = {
-  data: {},
+  data: [],
+  overviewData: [],
   referenceField: "",
   fields: [],
   trueFields: [],
@@ -142,7 +151,8 @@ const initialState = {
     x: Date.now(),
     y: 0
   },
-  domain: undefined
+  domain: undefined,
+  entireDomain: undefined
 }
 
 // Reducers
@@ -166,13 +176,31 @@ export default function reducer(state = initialState, action) {
       )
     case types.SET_REF_FIELD:
       let filteredFieldObjectList = state.fields.filter(f => f.name !== action.field)
+      let domain =  {
+        x: [ new Date(state.data[0][action.field]),
+             new Date(_.last(state.data)[action.field]) ],
+        y: [Math.min(
+              ...filteredFieldObjectList.map(
+                yField => _.minBy(state.data,  d => d[yField.name])[yField.name]
+              )
+            ),
+            Math.max(
+              ...filteredFieldObjectList.map(
+                yField => _.maxBy(state.data,  d => d[yField.name])[yField.name]
+              )
+            )
+          ],
+      }
       return Object.assign(
         {},
         state,
         {
+          overviewData: sampleData(state.data, action.field, domain.x),
           referenceField: action.field,
           trueFields: filteredFieldObjectList,
           activeFields: filteredFieldObjectList,
+          domain: domain,
+          entireDomain: domain,
         }
       )
     case types.SET_ACTIVE_FIELDS:
@@ -224,11 +252,27 @@ export default function reducer(state = initialState, action) {
         {
           domain: {
             x: action.x,
-            y: action.y
+            y: action.y,
+            mode: action.domainChangeMode
           }
         }
       )
     default:
       return state
   }
+}
+
+// Selectors
+export const getData = state => (state.referenceField === "" || !state.domain)
+                                  ? state.data
+                                  : sampleData(state.data,
+                                               state.referenceField,
+                                               state.domain.x)
+const sampleData = (data, refField, xDomain) => {
+  const filtered = data.filter(d => (Date.parse(d[refField]) >= Date.parse(xDomain[0]) &&
+                                     Date.parse(d[refField]) <= Date.parse(xDomain[1])))
+  const k = Math.ceil(filtered.length / SAMPLING_MAX_POINTS)
+  return (filtered.length > SAMPLING_MAX_POINTS)
+          ? filtered.filter((d, i) => ((i % k) === 0))
+          : filtered
 }

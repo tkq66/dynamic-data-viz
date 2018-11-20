@@ -1,9 +1,11 @@
-import { actions } from 'App/reducers/visSettings.js'
+import { actions, getData } from 'App/reducers/visSettings'
 
 // gives our component access to state through props.<prop name>
 export const mapStateToProps = state => ({
   state: {
+    getData: getData(state.visSettings),
     data: state.visSettings.data,
+    overviewData: state.visSettings.overviewData,
     referenceField: state.visSettings.referenceField,
     fields: state.visSettings.fields,
     trueFields: state.visSettings.trueFields,
@@ -12,6 +14,7 @@ export const mapStateToProps = state => ({
     overviewIXMode: state.visSettings.interactionMode.overview,
     cursorContext: state.visSettings.cursorContext,
     domain: state.visSettings.domain,
+    entireDomain: state.visSettings.entireDomain,
   }
 })
 
@@ -24,6 +27,6 @@ export const mapDispatchToProps = dispatch => ({
     setModeMain: modeName => dispatch(actions.setModeMain(modeName)),
     setModeOverview: modeName => dispatch(actions.setModeOverview(modeName)),
     setCursor: cursorValue => dispatch(actions.setCursor(cursorValue)),
-    setDomain: (x, y) => dispatch(actions.setDomain(x, y)),
+    setDomain: (x, y, domainChangeMode) => dispatch(actions.setDomain(x, y, domainChangeMode)),
   }
 })

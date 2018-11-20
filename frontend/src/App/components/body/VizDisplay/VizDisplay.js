@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps, mapDispatchToProps } from 'App/store/mappers'
+import { domainChangeMode } from 'App/reducers/visSettings'
 import styled from 'styled-components'
 import MainMLTS from './MainChart/MainMLTS'
 import OverviewMLTS from './OverviewChart/OverviewMLTS'
@@ -35,7 +36,7 @@ class VizDisplay extends Component {
   }
 
   onMainZoomChange(domain) {
-    this.props.action.setDomain(domain.x, domain.y)
+    this.props.action.setDomain(domain.x, domain.y, domainChangeMode.ZOOM)
     // TODO: Log activity on view
   }
 
@@ -44,7 +45,7 @@ class VizDisplay extends Component {
       x: bounds.x.map(b => b.valueOf()),
       y: bounds.y
     }
-    this.props.action.setDomain(domain.x, domain.y)
+    this.props.action.setDomain(domain.x, domain.y, domainChangeMode.SELECTION)
     // TODO: Log activity on view
   }
 
@@ -53,7 +54,7 @@ class VizDisplay extends Component {
   }
 
   onOverviewBrushChange(domain) {
-    this.props.action.setDomain(domain.x, domain.y)
+    this.props.action.setDomain(domain.x, domain.y, domainChangeMode.BRUSH)
     // TODO: Log activity on view
   }
 
@@ -64,7 +65,8 @@ class VizDisplay extends Component {
                   height={this.state.height * 0.8}
                   xFieldName={this.props.state.referenceField}
                   dataFieldNames={this.props.state.activeFields}
-                  data={this.props.state.data}
+                  data={this.props.state.getData}
+                  entireDomain={this.props.state.entireDomain}
                   currentMode={this.props.state.mainIXMode.value}
                   cursorContext={{
                     onCursorChange: this.onMainCursorChange.bind(this),
@@ -84,7 +86,7 @@ class VizDisplay extends Component {
                       height={this.state.height * 0.2}
                       xFieldName={this.props.state.referenceField}
                       dataFieldNames={this.props.state.activeFields}
-                      data={this.props.state.data}
+                      data={this.props.state.overviewData}
                       currentMode={this.props.state.overviewIXMode.value}
                       cursorContext={{
                         onCursorChange: this.onOverviewCursorChange.bind(this),

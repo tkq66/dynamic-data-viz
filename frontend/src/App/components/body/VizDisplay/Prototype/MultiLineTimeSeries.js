@@ -9,6 +9,7 @@ const MultiLineTimeSeries = (props) => (
     theme={VictoryTheme.material}
     width={props.width}
     height={props.height}
+    domain={props.entireDomain}
     scale={{ x: "time", y: "linear" }}
     containerComponent={props.interactionContainer}
   >

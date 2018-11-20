@@ -12,6 +12,7 @@ const MainMLTS = props => (
     xFieldName={props.xFieldName}
     dataFieldNames={props.dataFieldNames}
     data={props.data}
+    entireDomain={props.entireDomain}
     interactionContainer={InteractionContainerFactory(
                             props.xFieldName,
                             props.currentMode,
