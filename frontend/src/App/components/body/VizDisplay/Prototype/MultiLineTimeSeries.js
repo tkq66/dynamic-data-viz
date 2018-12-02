@@ -1,5 +1,5 @@
 import React from 'react'
-import { VictoryChart,
+import { VictoryChart,VictoryScatter,
          VictoryAxis,
          VictoryTheme,
          VictoryLine } from 'victory'

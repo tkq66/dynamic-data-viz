@@ -1,5 +1,6 @@
 import randomColor from 'randomcolor'
 import _ from 'lodash'
+import { getPeaks } from './peakDetection'
 
 const SAMPLING_MAX_POINTS = 150
 
@@ -139,6 +140,7 @@ export const domainChangeMode = {
 const initialState = {
   data: [],
   overviewData: [],
+  peakData: [],
   referenceField: "",
   fields: [],
   trueFields: [],
@@ -191,11 +193,21 @@ export default function reducer(state = initialState, action) {
             )
           ],
       }
+      let peakData = sampleData(state.data, {mode: "PH",
+                                             fields: filteredFieldObjectList.map(f => f.name),
+                                             refField: action.field,
+                                             xDomain: domain.x})
+      let overviewData = sampleData(peakData, {mode: "TOP",
+                                               fields: filteredFieldObjectList.map(f => f.name),
+                                               refField: action.field,
+                                               top: SAMPLING_MAX_POINTS,
+                                               xDomain: domain.x})
       return Object.assign(
         {},
         state,
         {
-          overviewData: sampleData(state.data, action.field, domain.x),
+          peakData: peakData,
+          overviewData: overviewData,
           referenceField: action.field,
           trueFields: filteredFieldObjectList,
           activeFields: filteredFieldObjectList,
@@ -263,16 +275,54 @@ export default function reducer(state = initialState, action) {
 }
 
 // Selectors
-export const getData = state => (state.referenceField === "" || !state.domain)
-                                  ? state.data
-                                  : sampleData(state.data,
-                                               state.referenceField,
-                                               state.domain.x)
-const sampleData = (data, refField, xDomain) => {
-  const filtered = data.filter(d => (Date.parse(d[refField]) >= Date.parse(xDomain[0]) &&
-                                     Date.parse(d[refField]) <= Date.parse(xDomain[1])))
-  const k = Math.ceil(filtered.length / SAMPLING_MAX_POINTS)
-  return (filtered.length > SAMPLING_MAX_POINTS)
-          ? filtered.filter((d, i) => ((i % k) === 0))
-          : filtered
+export const getData = state => {
+  return (state.referenceField === "" || !state.domain || state.peakData.length === 0)
+                                ? state.data
+                                : sampleData(state.peakData,
+                                             {mode: "TOP",
+                                              fields: state.activeFields.map(f => f.name),
+                                              refField: state.referenceField,
+                                              xDomain: state.domain.x
+                                             })}
+
+const sampleData = (data,
+                    {mode="PH",
+                     fields=undefined,
+                     top=SAMPLING_MAX_POINTS,
+                     refField=undefined,
+                     xDomain=undefined,
+                     sortKey="persistence"}) => {
+  let filtered = filterDataDomain(data, refField, xDomain)
+  return mode === "PH"
+         ? persistentHomologyPeakSampling(filtered, fields)
+         : mode === "IV"
+         ? intervalSampling(filtered)
+         : mode === "TOP"
+         ? filterDataTop(filtered, top, sortKey)
+         : []
+}
+
+const persistentHomologyPeakSampling = (data, fields) => getPeaks(data, fields)
+
+const intervalSampling = (data) => {
+  let k = Math.ceil(data.length / SAMPLING_MAX_POINTS)
+  return (data.length > SAMPLING_MAX_POINTS)
+          ? data.filter((d, i) => ((i % k) === 0))
+          : data
+}
+
+const filterDataDomain = (data, refField, xDomain) =>
+  data.filter(d => (Date.parse(d[refField]) >= Date.parse(xDomain[0]) &&
+                    Date.parse(d[refField]) <= Date.parse(xDomain[1])))
+
+const filterDataTop = (data, top, sortKey) => {
+  let i = []
+  return _.transform(_.cloneDeep(data).sort((a, b) => b[sortKey] - a[sortKey]),
+                     (acc, cv, ci) => {
+                       if (i.indexOf(cv.index) === -1) {
+                         i.push(cv.index)
+                         acc.push(cv)
+                       }
+                       return acc.length < top
+                     }, [])
 }
